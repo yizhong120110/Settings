@@ -1,0 +1,83 @@
+DEBUG: True # 是否在调试状态下
+CHECK_CHARDET: false # 是否进行文件字符集的检查
+
+DB_CONSTR: |
+    return dict( dsn = '127.0.0.1:1521/orcl' , user = 'tsyw' , password = 'tsyw' )
+DB_TYPE: oracle # postgresql
+USE_DB: |
+    return True
+
+PLUGINS: 
+    global_plugin: []
+
+LOGLEVEL: |
+    import logging
+    return logging.DEBUG
+LOGNAME: NEWGL
+
+# 存放log文件
+# LOGS_DIR 需要在环境变量中维护：.bash_profile
+LOGDIR: |
+    import sys ,os
+    if sys.platform[:3] == 'win':
+        LOGS_DIR = r'D:\tmp\log'
+    else:
+        LOGS_DIR = os.getenv( 'LOGSDIR' ) + os.sep
+    return LOGS_DIR
+
+# 存放临时文件
+# TMP_DIR 需要在环境变量中维护：.bash_profile
+TMPDIR: |
+    import sys ,os
+    if sys.platform[:3] == 'win':
+        TMPDIR = r'D:\tmp\fil'
+    else:
+        TMPDIR = os.getenv( 'TMPDIR' ) + os.sep
+    return TMPDIR
+
+# 存放通讯客户端文件：ocm
+# OCMDIR 需要在环境变量中维护：.bash_profile
+OCMDIR: |
+    import sys ,os
+    if sys.platform[:3] == 'win':
+        OCMDIR = r'D:\tmp\ocm'
+    else:
+        OCMDIR = os.getenv( 'OCMDIR' ) + os.sep
+    return OCMDIR
+# 存放通讯服务端文件：icp
+# ICPDIR 需要在环境变量中维护：.bash_profile
+ICPDIR: |
+    import sys ,os
+    if sys.platform[:3] == 'win':
+        ICPDIR = r'D:\tmp\icp'
+    else:
+        ICPDIR = os.getenv( 'ICPDIR' ) + os.sep
+    return ICPDIR
+
+
+SYS_TITLE: 管理系统
+BANKNAME: 华夏银行
+# 开发系统自动扩展sql文件( 此参数不可删除，只可想列表中加入数据 )
+SQLXML_LST: ['tcr_mapper.xml','ctrl_mapper.xml']
+
+# app扩展模块名称
+#APP_EXTENDED_1: 'extended_1'
+
+
+#FILE_CHARSET: GBK
+#DEFAULT_CHARSET: GBK
+#DB_ENGINE: |
+#    from sqlalchemy import *
+#    from sqlalchemy.orm import *
+#    return create_engine( 'postgres://oa:oa@localhost/shkjb_20130819' , echo=False , encoding = 'gbk' , pool_recycle = 600 , pool_size = 100 , max_overflow = 10 , strategy='threadlocal' )
+#DB_SESSION: |
+#    from sqlalchemy.orm import *
+#    from sqlalchemy.ext.declarative import *
+#    from sqlalchemy import create_engine
+#    d = create_engine( 'postgres://tjhxkh:tjhxkh@46.17.189.236:8998/hxkh_tj' , echo=False , encoding = 'gbk' , pool_recycle = 600 , pool_size = 100 , max_overflow = 10 , strategy='threadlocal' )
+#    return scoped_session( sessionmaker( autocommit = True , autoflush = False , bind = d ) ) 
+
+SESS_ID_ONLY: |
+    return False
+SESS_ID_CONSTR: |
+    return dict( host='localhost', port=5629 )
